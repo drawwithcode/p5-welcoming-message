@@ -22,16 +22,18 @@ function receiveColor(color) {
     "type here your username");
   const userData = {
     name: myName,
-    color: myColor
+    color: myColor,
+    coordinates: [random(.1,.9), random(.1,.9)]
   }
   socket.emit("name", userData);
+  showWelcome(userData)
 }
 function showWelcome(data){
   console.log("new connection from", data)
   push()
     fill(data.color)
     textAlign(CENTER)
-    translate(random(30,width-30),random(10,height-10))
+    translate(data.coordinates[0]*width,data.coordinates[1]*height)
     text("Hello "+data.name, 0,0)
   pop()
 }
